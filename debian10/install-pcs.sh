@@ -23,12 +23,20 @@ help()
 }
 
 # get default environnement variables:
-if ! [ -f "$ENV_PATH" ]
+if ! [ -d "$ENV_PATH" ]
 then
-  echo "Must be run on project root directory."
+  echo "[ERROR] Must be run on project root directory."
   exit 1
 fi
-export $(cat "$ENV_PATH" | sed 's/#.*//g' | xargs)
+if ! [ -f "$ENV_PATH$ENV_FILE" ]
+then
+  echo -e "\n\r[ERROR] Environnement variables not found:    ...please,"
+  echo -e "\t> type 'cp $ENV_FILE.example $ENV_FILE'"
+  echo -e "\t> edit the new file created ($ENV_FILE) and enter your server configuration"
+  echo -e "\t> run this script again and rules!\n\r"
+  exit 1
+fi
+export $(cat "$ENV_PATH$ENV_FILE" | sed 's/#.*//g' | xargs)
 
 # scan arguments:
 while getopts "d:u:p:h" opt

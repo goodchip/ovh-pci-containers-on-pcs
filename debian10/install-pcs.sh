@@ -14,7 +14,6 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo ""
    echo "usage: $0 [-d <device>] [-u <unit>] [-p <path>] [-h]"
    echo -e "\t-d : set device to install containers (default: $DEFAULT_PCS_DEVICE_NAME)"
    echo -e "\t-u : set unit partition to install containers (default: $DEFAULT_PCS_DEVICE_UNIT)"

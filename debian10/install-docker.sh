@@ -8,9 +8,7 @@
 #                                            #
 ##############################################
 
-# define default variables:
-DEFAULT_DOCKER_COMPOSE_VERSION=1.19.0;
-DEFAULT_DOCKER_COMPOSE_PATH="/usr/local/bin/docker-compose";
+ENV_PATH="../ovh-pci-containers-on-pcs/.env"
 
 # define help function:
 help()
@@ -22,11 +20,19 @@ help()
    exit 1
 }
 
+# get default environnement variables:
+if ! [ -f "$ENV_PATH" ]
+then
+  echo "Must be run on project root directory."
+  exit 1
+fi
+export $(cat "$ENV_PATH" | sed 's/#.*//g' | xargs)
+
 # scan arguments:
 while getopts "c:h" opt
 do
    case "$opt" in
-      c ) DOCKER_COMPOSE_VERSION="$OPTARG" ;;
+      c ) PCI_DOCKER_COMPOSE_VERSION="$OPTARG" ;;
       h ) help ;;
    esac
 done
@@ -38,9 +44,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # get docker-compose version if set
-if [ -z "$DOCKER_COMPOSE_VERSION" ]
+if [ -z "$PCI_DOCKER_COMPOSE_VERSION" ]
 then
-   DOCKER_COMPOSE_VERSION=$DEFAULT_DOCKER_COMPOSE_VERSION;
+   PCI_DOCKER_COMPOSE_VERSION=$DEFAULT_PCI_DOCKER_COMPOSE_VERSION;
 fi
 
 # install docker:
@@ -51,9 +57,9 @@ systemctl enable docker
 docker version
 
 # install docker-compose:
-echo "Installing docker-compose" $DOCKER_COMPOSE_VERSION "on" $DEFAULT_DOCKER_COMPOSE_PATH "...";
-curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o $DEFAULT_DOCKER_COMPOSE_PATH
-chmod +x $DEFAULT_DOCKER_COMPOSE_PATH
+echo "Installing docker-compose" $PCI_DOCKER_COMPOSE_VERSION "on" $DEFAULT_PCS_DOCKER_COMPOSE_PATH "...";
+curl -L "https://github.com/docker/compose/releases/download/$PCI_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o $DEFAULT_PCS_DOCKER_COMPOSE_PATH
+chmod +x $DEFAULT_PCS_DOCKER_COMPOSE_PATH
 
 # end:
 echo "Installation finished.";

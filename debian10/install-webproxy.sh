@@ -93,12 +93,9 @@ echo "Configuring web proxy to listen $IP and making bot cerficat using email: $
 git clone --recurse-submodules "https://github.com/evertramos/nginx-proxy-automation.git" "$CONTAINERS_NAME"
 cd "$CONTAINERS_NAME/bin"
 ./fresh-start.sh --yes -e "$EMAIL" -ip "$IP" --skip-docker-image-check
-docker-compose up
-docker-compose start
 
-# just for futures references:
-#./fresh-start.sh --yes -e contact@underscore.radio.fm --skip-docker-image-check
-#docker network create webproxy
+# have sure than docker-compose was started (fresh-start script is bugged sometime for run it at the end of configuration)
+docker-compose up -d
 
 # end:
 echo "Installation finished.";

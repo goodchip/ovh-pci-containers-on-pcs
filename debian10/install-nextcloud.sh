@@ -220,6 +220,7 @@ patch 'NEXTCLOUD_ADMIN_PASSWORD=' $SITE_ADMINPASS '.env'
 # launch containers:
 echo "Launch nextcloud container ...";
 docker-compose up -d
+sleep 2
 
 # overwrite protocol to https:
 echo "Patch to https protocol ...";

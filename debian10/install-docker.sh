@@ -57,9 +57,9 @@ systemctl enable docker
 docker version
 
 # install docker-compose:
-echo "Installing docker-compose" $PCI_DOCKER_COMPOSE_VERSION "on" $DEFAULT_PCS_DOCKER_COMPOSE_PATH "...";
-curl -L "https://github.com/docker/compose/releases/download/$PCI_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o $DEFAULT_PCS_DOCKER_COMPOSE_PATH
-chmod +x $DEFAULT_PCS_DOCKER_COMPOSE_PATH
+echo "Installing docker-compose" $PCI_DOCKER_COMPOSE_VERSION "on" $DEFAULT_PCI_DOCKER_COMPOSE_PATH "...";
+curl -L "https://github.com/docker/compose/releases/download/$PCI_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o $DEFAULT_PCI_DOCKER_COMPOSE_PATH
+chmod +x $DEFAULT_PCI_DOCKER_COMPOSE_PATH
 
 # end:
 echo "Installation finished.";

@@ -54,7 +54,7 @@ fi
 echo "Preparing distribution...";
 
 # upgrade distribution:
-apt-get -y update && sudo apt-get -y upgrade
+apt-get -y update && apt-get -y upgrade
 
 # end:
 echo "Installation finished.";

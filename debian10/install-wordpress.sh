@@ -189,7 +189,7 @@ echo "Configuring wordpress container ...";
 cd "$CONTAINERS_NAME"
 
 # patch docker-compose.yml for bug if more one '/var/lib/mysql' is declared (multiple docker configuration):
-patch '{DB_FILES}:/var/lib/' 'mysql-'$CONTAINERS_NAME 'docker-compose.yml'
+patch '{DB_FILES}:/var/lib/' 'mysql-'$SITE_IMAGE 'docker-compose.yml'
 
 # make own environnement variables in patching defaults input founded in .env.example:
 cp '.env.example' '.env'

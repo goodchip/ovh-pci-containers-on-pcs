@@ -1,0 +1,21 @@
+# .configure file to exec (in root) before all usage
+##############################################
+#                                            #
+# File of git repo:                          #
+# goodchip/ovh-pci-containers-on-pcs/master/ #
+#                                            #
+# Licence MIT                                #
+#                                            #
+##############################################
+
+# check is run in root:
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root." 
+   exit 1
+fi
+
+# go to project directory:
+cd "ovh-pci-containers-on-pcs/"
+
+# add exec right to all .sh script, recursively:
+find . -type f -iname "*.sh" -exec chmod +x {} \;

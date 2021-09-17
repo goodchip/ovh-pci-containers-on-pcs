@@ -14,7 +14,6 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo ""
    echo "usage: $0 [-e <email>] [-i <ip>] [-p <path>] [-n <name>] [-h]"
    echo -e "\t-e : set email for cetificat (default: $DEFAULT_CONTAINER_WEBPROXY_EMAIL)"
    echo -e "\t-i : set public ip to listen (default: $DEFAULT_CONTAINER_WEBPROXY_IP)"

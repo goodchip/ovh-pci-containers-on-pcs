@@ -56,5 +56,8 @@ echo "Preparing distribution...";
 # upgrade distribution:
 apt-get -y update && apt-get -y upgrade
 
+# install git if not present:
+apt-get -y install git
+
 # end:
 echo "Installation finished.";

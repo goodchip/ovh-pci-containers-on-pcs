@@ -1,7 +1,5 @@
-# ovh-instances-automations
-Automation post-install script for ovh public cloud instances
+# ovh-pci-containers-on-pcs
+Automation post-install scripts for install docker based configuration running on PCI (public cloud instance) with containers attached on PCS (public cloud storage)
 
 Install :
-* sudo curl -L "https://raw.githubusercontent.com/goodchip/ovh-pci-containers-on-pcs/master/test.sh" -O
-* sudo chmod +x test.sh
-* sudo ./test.sh
+git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && ./ovh-pci-containers-on-pcs/.configure

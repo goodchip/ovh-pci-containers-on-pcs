@@ -8,7 +8,8 @@
 #                                            #
 ##############################################
 
-ENV_PATH="../ovh-pci-containers-on-pcs/.env"
+ENV_PATH="../ovh-pci-containers-on-pcs/"
+ENV_FILE=".env"
 
 # define help function:
 help()

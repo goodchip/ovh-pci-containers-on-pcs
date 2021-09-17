@@ -85,4 +85,10 @@ then
 	./$OS_DISTRIBUTION/install-webproxy.sh
 fi
 
+if  [ $DEFAULT_CONTAINER_WORDPRESS_AUTOINSTALL = 1 ]
+then
+	echo -e "\n\r[INSTALL]---- --- -- - - -> WORDPRESS:"
+	./$OS_DISTRIBUTION/install-wordpress.sh
+fi
+
 echo -e "\n\r[END] auto-install.\n\r";

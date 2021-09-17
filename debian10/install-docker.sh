@@ -14,7 +14,6 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo ""
    echo "usage: $0 [-c <version>] [-h]"
    echo -e "\t-c : set docker-compose version to install (default: $DEFAULT_PCI_DOCKER_COMPOSE_VERSION)"
    echo -e "\t-h : display this help"

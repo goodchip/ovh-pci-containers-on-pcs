@@ -4,7 +4,7 @@ Automation post-install scripts for install docker based configuration running o
 
 # Installation :
 * Clone the repo to your current directory:
-> git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && ./ovh-pci-containers-on-pcs/.configure
+> git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && sudo ./ovh-pci-containers-on-pcs/.configure
 
 # Configuration:
 * Locate you into the project root directory:

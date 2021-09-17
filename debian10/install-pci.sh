@@ -8,8 +8,7 @@
 #                                            #
 ##############################################
 
-# define default variables:
-# 
+ENV_PATH="../ovh-pci-containers-on-pcs/.env"
 
 # define help function:
 help()
@@ -19,6 +18,14 @@ help()
    echo -e "\t-h : display this help"
    exit 1
 }
+
+# get default environnement variables:
+if ! [ -f "$ENV_PATH" ]
+then
+  echo "Must be run on project root directory."
+  exit 1
+fi
+export $(cat "$ENV_PATH" | sed 's/#.*//g' | xargs)
 
 # scan arguments:
 while getopts "h" opt

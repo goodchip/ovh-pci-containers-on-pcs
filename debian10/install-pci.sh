@@ -14,7 +14,6 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo ""
    echo "usage: $0 [-h]"
    echo -e "\t-h : display this help"
    exit 1

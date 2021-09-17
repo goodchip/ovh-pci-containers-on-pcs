@@ -14,7 +14,6 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo ""
    echo "usage: $0 [-o <osname>] [-h]"
    echo -e "\t-o : set osname image of your PCS (default: $DEFAULT_PCI_OS_DISTRIBUTION)"
    echo -e "\t-h : display this help"

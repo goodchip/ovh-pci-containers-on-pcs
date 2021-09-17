@@ -14,10 +14,12 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo "usage: $0 [-u <urldomain>] [-a <appimage>] [-v <appversion>] [-s <sgbdimage>] [-g <sgbdversion>] [-d <database>] [-x <prefix>] [-j <dbusername>] [-k <dbuserpass>] [-r <dbrootpass>] [-e <email>] [-p <path>] [-n <name>] [-w <network>] [-h]"
+   echo "usage: $0 [-u <urldomain>] [-a <appimage>] [-v <appversion>] [-y <adminname>] [-z <adminpass>] [-s <sgbdimage>] [-g <sgbdversion>] [-d <database>] [-x <prefix>] [-j <dbusername>] [-k <dbuserpass>] [-r <dbrootpass>] [-e <email>] [-p <path>] [-n <name>] [-w <network>] [-h]"
    echo -e "\t-u : set urldomain to listen (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAIN)"
    echo -e "\t-a : set app image to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_IMAGE)"
    echo -e "\t-v : set version to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_VERSION)"
+   echo -e "\t-y : set admin name login (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINNAME)"
+   echo -e "\t-z : set admin pass login (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINPASS)"
    echo -e "\t-s : set sgbd image to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_DB_IMAGE)"
    echo -e "\t-g : set sgbd version to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_DB_VERSION)"
    echo -e "\t-d : set database name to use (default: $DEFAULT_CONTAINER_NEXTCLOUD_DB_DATABASE)"
@@ -56,12 +58,14 @@ fi
 export $(cat "$ENV_PATH$ENV_FILE" | sed 's/#.*//g' | xargs)
 
 # scan arguments:
-while getopts "u:a:v:s:g:d:x:j:k:r:e:p:n:w:h" opt
+while getopts "u:a:v:y:z:s:g:d:x:j:k:r:e:p:n:w:h" opt
 do
    case "$opt" in
       u ) SITE_DOMAIN="$OPTARG" ;;
       a ) SITE_IMAGE="$OPTARG" ;;
       v ) SITE_VERSION="$OPTARG" ;;
+      y ) SITE_ADMINNAME="$OPTARG" ;;
+      z ) SITE_ADMINPASS="$OPTARG" ;;
       s ) DB_IMAGE="$OPTARG" ;;
       g ) DB_VERSION="$OPTARG" ;;
       d ) DB_DATABASE="$OPTARG" ;;
@@ -99,6 +103,18 @@ fi
 if [ -z "$SITE_VERSION" ]
 then
    SITE_VERSION=$DEFAULT_CONTAINER_NEXTCLOUD_SITE_VERSION;
+fi
+
+# update site admin name defaults if set:
+if [ -z "$SITE_ADMINNAME" ]
+then
+   SITE_ADMINNAME=$DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINNAME;
+fi
+
+# update site admin pass defaults if set:
+if [ -z "$SITE_ADMINPASS" ]
+then
+   SITE_ADMINPASS=$DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINPASS;
 fi
 
 # update db image defaults if set:
@@ -198,15 +214,16 @@ patch 'VIRTUAL_HOST=' $SITE_DOMAIN '.env'
 patch 'LETSENCRYPT_HOST=' $SITE_DOMAIN '.env'
 patch 'LETSENCRYPT_EMAIL=' $EMAIL '.env'
 patch 'NETWORK=' $WEBPROXY_NETWORK '.env'
+patch 'NEXTCLOUD_ADMIN_USER=' $SITE_ADMINNAME '.env'
+patch 'NEXTCLOUD_ADMIN_PASSWORD=' $SITE_ADMINPASS '.env'
 
 # launch containers:
 echo "Launch nextcloud container ...";
-#docker-compose up -d
+docker-compose up -d
 
 # overwrite protocol to https:
 echo "Patch to https protocol ...";
-#docker exec --user www-data $CONTAINERS_NAME php occ config:system:set overwriteprotocol --value="https" 
+docker exec --user www-data $SITE_IMAGE"-site" php occ config:system:set overwriteprotocol --value="https" 
 
 # end:
 echo "Installation finished.";
-#

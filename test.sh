@@ -4,8 +4,8 @@ helpFunction()
 {
    echo ""
    echo "Usage: $0 -docker-compose-version VERSION"
-   echo -e "\t-docker-compose-version : set version of docker-compose to install (optional)"
-   echo -e "\t-docker-compose-version : set version of docker-compose to install (optional)"
+   echo -e "\t-docker-compose-version  : set version of docker-compose to install (optional)"
+   echo -e "\t-help                    : display this help"
    exit 1
 }
 

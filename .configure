@@ -21,4 +21,4 @@ cd "ovh-pci-containers-on-pcs/"
 find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 # remove configure script:
-rm .autoconfig
+rm .configure

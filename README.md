@@ -16,7 +16,7 @@ Automation post-install scripts for install docker based configuration running o
 * Edit the '.env' file environnement with your server configuration nedded:
 > sudo nano ../ovh-pci-containers-on-pcs/.env
 
-* Save the '.env' file typing [CTRL+X] and [y]
+* Save the '.env' file typing [CTRL+X] and [y] and [ENTER]
 
 
 # Usage :

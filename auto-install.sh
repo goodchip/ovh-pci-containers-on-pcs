@@ -91,4 +91,10 @@ then
 	./$OS_DISTRIBUTION/install-wordpress.sh
 fi
 
+if  [ $DEFAULT_CONTAINER_NEXTCLOUD_AUTOINSTALL = 1 ]
+then
+	echo -e "\n\r[INSTALL]---- --- -- - - -> NEXTCLOUD:"
+	./$OS_DISTRIBUTION/install-nextcloud.sh
+fi
+
 echo -e "\n\r[END] auto-install.\n\r";

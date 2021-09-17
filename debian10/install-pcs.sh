@@ -14,8 +14,10 @@ ENV_PATH="../ovh-pci-containers-on-pcs/.env"
 help()
 {
    echo ""
-   echo "usage: $0 [-c <version>] [-h]"
-   echo -e "\t-c : set docker-compose version to install (optional)"
+   echo "usage: $0 [-d <device>] [-u <unit>] [-p <path>] [-h]"
+   echo -e "\t-d : set device to install containers (default: $DEFAULT_PCS_DEVICE_NAME)"
+   echo -e "\t-u : set unit partition to install containers (default: $DEFAULT_PCS_DEVICE_UNIT)"
+   echo -e "\t-p : set path to mount containers (default: $DEFAULT_PCS_DEVICE_MOUNT_PATH)"
    echo -e "\t-h : display this help"
    exit 1
 }
@@ -29,10 +31,12 @@ fi
 export $(cat "$ENV_PATH" | sed 's/#.*//g' | xargs)
 
 # scan arguments:
-while getopts "c:h" opt
+while getopts "d:u:p:h" opt
 do
    case "$opt" in
-      c ) PCI_DOCKER_COMPOSE_VERSION="$OPTARG" ;;
+      d ) DEVICE_NAME="$OPTARG" ;;
+      p ) DEVICE_UNIT="$OPTARG" ;;
+      m ) DEVICE_MOUNT_PATH="$OPTARG" ;;
       h ) help ;;
    esac
 done
@@ -43,23 +47,47 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# get docker-compose version if set
-if [ -z "$PCI_DOCKER_COMPOSE_VERSION" ]
+# update disk name defaults if set:
+if [ -z "$DEVICE_NAME" ]
 then
-   PCI_DOCKER_COMPOSE_VERSION=$DEFAULT_PCI_DOCKER_COMPOSE_VERSION;
+   DEVICE_NAME=$DEFAULT_PCS_DEVICE_NAME;
 fi
 
-# install docker:
-echo "Installing docker...";
-apt install docker.io -y
-systemctl start docker
-systemctl enable docker
-docker version
+# update partition number defaults if set:
+if [ -z "$DEVICE_UNIT" ]
+then
+   DEVICE_UNIT=$DEFAULT_PCS_DEVICE_UNIT;
+fi
 
-# install docker-compose:
-echo "Installing docker-compose" $PCI_DOCKER_COMPOSE_VERSION "on" $DEFAULT_PCS_DOCKER_COMPOSE_PATH "...";
-curl -L "https://github.com/docker/compose/releases/download/$PCI_DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o $DEFAULT_PCS_DOCKER_COMPOSE_PATH
-chmod +x $DEFAULT_PCS_DOCKER_COMPOSE_PATH
+# update mount path defaults if set:
+if [ -z "$DEVICE_MOUNT_PATH" ]
+then
+   DEVICE_MOUNT_PATH=$DEFAULT_PCS_DEVICE_MOUNT_PATH;
+fi
+
+# start installation:
+echo "Installing $DEVICE_NAME$DEVICE_UNIT on $DEVICE_MOUNT_PATH ...";
+
+# partionning additional disk:
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk "$DEVICE_NAME"
+  o # clear the in memory partition table
+  n # new partition
+  p # primary partition
+  $DEVICE_UNIT # partition number $DEVICE_UNIT
+    # default - start at beginning of disk 
+    # default - end at bottom of disk
+  w # write the partition table
+  q # and we're done
+EOF
+
+# format partition of additional disk:
+mkfs.ext4 "$DEVICE_NAME$DEVICE_UNIT"
+
+# automount partition of additional disk:
+mkdir "$DEVICE_MOUNT_PATH"
+mount "$DEVICE_NAME$DEVICE_UNIT" "$DEVICE_MOUNT_PATH"
+DISK_UUID="$(blkid -s UUID -o value $DEVICE_NAME$DEVICE_UNIT)"
+echo "UUID="$DISK_UUID"    $DEVICE_MOUNT_PATH    ext4    nofail    0    0" | tee -a /etc/fstab
 
 # end:
 echo "Installation finished.";

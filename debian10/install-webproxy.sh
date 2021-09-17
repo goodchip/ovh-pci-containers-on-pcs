@@ -90,7 +90,7 @@ cd /mnt/containers/
 
 # install NGINX Proxy Automation:
 echo "Configuring web proxy to listen $IP and making bot cerficat using email: $EMAIL ...";
-git clone --recurse-submodules "https://github.com/evertramos/nginx-proxy-automation.git" "$CONTAINERS_NAME"
+git clone --recurse-submodules "$DEFAULT_CONTAINER_WEBPROXY_GIT" "$CONTAINERS_NAME"
 cd "$CONTAINERS_NAME/bin"
 ./fresh-start.sh --yes -e "$EMAIL" -ip "$IP" --skip-docker-image-check
 

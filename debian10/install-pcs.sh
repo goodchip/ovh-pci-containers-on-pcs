@@ -35,8 +35,8 @@ while getopts "d:u:p:h" opt
 do
    case "$opt" in
       d ) DEVICE_NAME="$OPTARG" ;;
-      p ) DEVICE_UNIT="$OPTARG" ;;
-      m ) DEVICE_MOUNT_PATH="$OPTARG" ;;
+      u ) DEVICE_UNIT="$OPTARG" ;;
+      p ) DEVICE_MOUNT_PATH="$OPTARG" ;;
       h ) help ;;
    esac
 done

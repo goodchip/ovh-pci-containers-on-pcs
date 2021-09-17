@@ -19,3 +19,6 @@ cd "ovh-pci-containers-on-pcs/"
 
 # add exec right to all .sh script, recursively:
 find . -type f -iname "*.sh" -exec chmod +x {} \;
+
+# remove configure script:
+rm .autoconfig

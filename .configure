@@ -15,7 +15,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # echo configuration processing message:
-echo -n "Project configuring..."
+echo -n "Project autoconfigure:"
 
 # go to project directory:
 cd "ovh-pci-containers-on-pcs/"
@@ -27,7 +27,7 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 rm .configure
 
 # echo configuration success message:
-echo ", done."
+echo " done."
 
 # exit:
 exit 0

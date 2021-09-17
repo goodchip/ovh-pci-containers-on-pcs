@@ -14,6 +14,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# echo configuration processing message:
+echo "Project configuration"
+
 # go to project directory:
 cd "ovh-pci-containers-on-pcs/"
 
@@ -22,3 +25,9 @@ find . -type f -iname "*.sh" -exec chmod +x {} \;
 
 # remove configure script:
 rm .configure
+
+# echo configuration success message:
+echo -n ", done."
+
+# exit:
+exit 0

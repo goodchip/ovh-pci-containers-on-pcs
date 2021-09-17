@@ -1,4 +1,4 @@
-# .configure file to exec (in root) before all usage
+#!/bin/bash
 ##############################################
 #                                            #
 # File of git repo:                          #

@@ -3,6 +3,9 @@ Automation post-install scripts for install docker based configuration running o
 
 
 # Installation :
+* Update distribution and install git if not present:
+> apt-get -y update && sudo apt-get -y upgrade && apt-get -y install git
+
 * Clone the repo to your current directory:
 > git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && sudo ./ovh-pci-containers-on-pcs/.configure
 
@@ -22,19 +25,19 @@ Automation post-install scripts for install docker based configuration running o
 # Usage :
 * Use the differents scripts located into /distrib##/ directories to configure step by step your instance, by example (for debian10):
 
-> ./debian10/install-pci.sh -h        # for prepare your PCI
+> sudo ./debian10/install-pci.sh -h        # for prepare your PCI
 
-> ./debian10/install-pcs.sh -h        # for install your PCS (attach your volume with ovh manager after)
+> sudo ./debian10/install-pcs.sh -h        # for install your PCS (attach your volume with ovh manager after)
 
-> ./debian10/install-docker.sh -h     # for install docker and docker-compose in your PCI
+> sudo ./debian10/install-docker.sh -h     # for install docker and docker-compose in your PCI
 
-> ./debian10/install-webproxy.sh -h   # for install container webproxy in your PCS
+> sudo ./debian10/install-webproxy.sh -h   # for install container webproxy in your PCS
 
-> ./debian10/install-wordpress.sh -h   # for install container wordpress in your PCS
+> sudo ./debian10/install-wordpress.sh -h   # for install container wordpress in your PCS
 
-> ./debian10/install-nextcloud.sh -h   # for install container nextcloud in your PCS
+> sudo ./debian10/install-nextcloud.sh -h   # for install container nextcloud in your PCS
 
 * OR, use the autoinstall script for all-in-one configuration (make you sure to have correctly edited the '.env' file after!!!) :
-> ./auto-install.sh
+> sudo ./auto-install.sh
 
 # Have fun!

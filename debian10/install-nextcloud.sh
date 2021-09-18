@@ -14,8 +14,8 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo "usage: $0 [-u <urldomain>] [-a <appimage>] [-v <appversion>] [-y <adminname>] [-z <adminpass>] [-s <sgbdimage>] [-g <sgbdversion>] [-d <database>] [-x <prefix>] [-j <dbusername>] [-k <dbuserpass>] [-r <dbrootpass>] [-e <email>] [-p <path>] [-n <name>] [-w <network>] [-h]"
-   echo -e "\t-u : set urldomain to listen (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAINS)"
+   echo "usage: $0 [-u <urldomains>] [-a <appimage>] [-v <appversion>] [-y <adminname>] [-z <adminpass>] [-s <sgbdimage>] [-g <sgbdversion>] [-d <database>] [-x <prefix>] [-j <dbusername>] [-k <dbuserpass>] [-r <dbrootpass>] [-e <email>] [-p <path>] [-n <name>] [-w <network>] [-h]"
+   echo -e "\t-u : set urldomains to listen (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAINS)"
    echo -e "\t-a : set app image to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_IMAGE)"
    echo -e "\t-v : set version to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_VERSION)"
    echo -e "\t-y : set admin name login (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINNAME)"

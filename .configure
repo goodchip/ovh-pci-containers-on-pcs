@@ -23,6 +23,10 @@ cd "ovh-pci-containers-on-pcs/"
 # add exec right to all .sh script, recursively:
 find . -type f -iname "*.sh" -exec chmod +x {} \;
 
+# secure .env files:
+chown root:root .env*
+chmod 600 .env*
+
 # remove configure script:
 rm .configure
 

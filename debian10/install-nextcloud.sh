@@ -15,7 +15,7 @@ ENV_FILE=".env"
 help()
 {
    echo "usage: $0 [-u <urldomain>] [-a <appimage>] [-v <appversion>] [-y <adminname>] [-z <adminpass>] [-s <sgbdimage>] [-g <sgbdversion>] [-d <database>] [-x <prefix>] [-j <dbusername>] [-k <dbuserpass>] [-r <dbrootpass>] [-e <email>] [-p <path>] [-n <name>] [-w <network>] [-h]"
-   echo -e "\t-u : set urldomain to listen (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAIN)"
+   echo -e "\t-u : set urldomain to listen (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAINS)"
    echo -e "\t-a : set app image to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_IMAGE)"
    echo -e "\t-v : set version to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_VERSION)"
    echo -e "\t-y : set admin name login (default: $DEFAULT_CONTAINER_NEXTCLOUD_SITE_ADMINNAME)"
@@ -61,7 +61,7 @@ export $(cat "$ENV_PATH$ENV_FILE" | sed 's/#.*//g' | xargs)
 while getopts "u:a:v:y:z:s:g:d:x:j:k:r:e:p:n:w:h" opt
 do
    case "$opt" in
-      u ) SITE_DOMAIN="$OPTARG" ;;
+      u ) SITE_DOMAINS="$OPTARG" ;;
       a ) SITE_IMAGE="$OPTARG" ;;
       v ) SITE_VERSION="$OPTARG" ;;
       y ) SITE_ADMINNAME="$OPTARG" ;;
@@ -88,9 +88,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # update site domains defaults if set:
-if [ -z "$SITE_DOMAIN" ]
+if [ -z "$SITE_DOMAINS" ]
 then
-   SITE_DOMAIN=$DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAIN;
+   SITE_DOMAINS=$DEFAULT_CONTAINER_NEXTCLOUD_SITE_DOMAINS;
 fi
 
 # update site image defaults if set:
@@ -210,8 +210,8 @@ patch 'NEXTCLOUD_TABLE_PREFIX=' $DB_PREFIX '.env'
 patch 'MYSQL_USER=' $DB_USERNAME '.env'
 patch 'MYSQL_PASSWORD=' $DB_USERPASS '.env'
 patch 'MYSQL_ROOT_PASSWORD=' $DB_ROOTPASS '.env'
-patch 'VIRTUAL_HOST=' $SITE_DOMAIN '.env'
-patch 'LETSENCRYPT_HOST=' $SITE_DOMAIN '.env'
+patch 'VIRTUAL_HOST=' $SITE_DOMAINS '.env'
+patch 'LETSENCRYPT_HOST=' $SITE_DOMAINS '.env'
 patch 'LETSENCRYPT_EMAIL=' $EMAIL '.env'
 patch 'NETWORK=' $WEBPROXY_NETWORK '.env'
 patch 'NEXTCLOUD_ADMIN_USER=' $SITE_ADMINNAME '.env'

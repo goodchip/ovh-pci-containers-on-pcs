@@ -58,5 +58,9 @@ apt-get -y update && apt-get -y upgrade
 # install git if not present:
 apt-get -y install git
 
+# secure .env files:
+chown root:root .env*
+chmod 600 .env*
+
 # end:
 echo "Installation finished.";

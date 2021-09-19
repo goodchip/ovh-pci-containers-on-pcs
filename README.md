@@ -25,17 +25,17 @@ Automation post-install scripts for install docker based configuration running o
 # Usage :
 * Use the differents scripts located into /distrib##/ directories to configure step by step your instance, by example (for debian10):
 
-> sudo ./debian10/install-pci.sh -h        # for prepare your PCI
+> sudo ./debian10/install-pci.sh -h        # for get help to prepare your PCI
 
-> sudo ./debian10/install-pcs.sh -h        # for install your PCS (attach your volume with ovh manager after)
+> sudo ./debian10/install-pcs.sh -h        # for get help to install your PCS (attach your volume with ovh manager after)
 
-> sudo ./debian10/install-docker.sh -h     # for install docker and docker-compose in your PCI
+> sudo ./debian10/install-docker.sh -h     # for get help to install docker and docker-compose in your PCI
 
-> sudo ./debian10/install-webproxy.sh -h   # for install container webproxy in your PCS
+> sudo ./debian10/install-webproxy.sh -h   # for get help to install container webproxy in your PCS
 
-> sudo ./debian10/install-wordpress.sh -h   # for install container wordpress in your PCS
+> sudo ./debian10/install-wordpress.sh -h   # for get help to install container wordpress in your PCS
 
-> sudo ./debian10/install-nextcloud.sh -h   # for install container nextcloud in your PCS
+> sudo ./debian10/install-nextcloud.sh -h   # for get help to install container nextcloud in your PCS
 
 * OR, use the autoinstall script for all-in-one configuration (make you sure to have correctly edited the '.env' file after!!!) :
 > sudo ./auto-install.sh

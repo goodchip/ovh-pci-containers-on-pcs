@@ -9,6 +9,7 @@ Automation post-install scripts for install docker based configuration running o
 * Clone the repo to your current directory:
 > git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && sudo ./ovh-pci-containers-on-pcs/.configure
 
+
 # Scripts configuration:
 * Locate you into the project root directory:
 > cd ovh-pci-containers-on-pcs/
@@ -43,9 +44,15 @@ Automation post-install scripts for install docker based configuration running o
 
 # Scripts Usage : backup containers
 * Use the differents scripts located into /distrib##/ directories to backup containers one by one:
-> sudo ./debian10/backup-wordpress.sh -h        # for get help to backup wordpress site and database containers
+> sudo ./debian10/backup-wordpress.sh -h        # for get help to backup wordpress site and database from containers
 
 * OR, use the auto-backup script for backup all containers (make you sure to have correctly edited the '.env' file after!!!) :
 > sudo ./auto-backup.sh
+
+
+# Scripts Usage : restore containers
+* Use the differents scripts located into /distrib##/ directories to restore containers one by one:
+> sudo ./debian10/restore-wordpress.sh -h        # for get help to restore wordpress site and database to containers
+
 
 # Have fun!

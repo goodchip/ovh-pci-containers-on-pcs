@@ -134,7 +134,6 @@ fi
 
 # prepare containers backup directory:
 mkdir -p "$BACKUP_PATH"
-#chown debian:debian /mnt/containers/backups/
 
 # backup container wordpress site:
 echo "Backup wordpress site $BACKUP_SOURCE_PATH to $BACKUP_DESTINATION_TAR_FILE $BACKUP_EXCLUDE_INFOS ...";

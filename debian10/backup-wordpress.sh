@@ -111,7 +111,7 @@ then
    DB_ROOTPASS=$DEFAULT_CONTAINER_WORDPRESS_DB_ROOTPASS;
 fi
 
-# start installation:
+# start backup:
 echo "Backup wordpress containers ...";
 
 BACKUP_SOURCE_PATH="$CONTAINERS_PATH$CONTAINERS_NAME/$SITE_SOURCEDIR"

@@ -58,7 +58,7 @@ then
 fi
 
 # start auto backup:
-echo -e "\n\r[BEGIN] auto-backup on yours containers...";
+echo -e "\n\r[BEGIN] auto-backup yours containers...";
 
 if  [ $DEFAULT_CONTAINER_WORDPRESS_AUTOBACKUP = 1 ]
 then

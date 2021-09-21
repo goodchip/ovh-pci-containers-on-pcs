@@ -14,8 +14,9 @@ ENV_FILE=".env"
 # define help function:
 help()
 {
-   echo "usage: $0 [-o <osname>] [-h]"
+   echo "usage: $0 [-o <osname>] [-X] [-h]"
    echo -e "\t-o : set osname image of your PCI (default: $DEFAULT_PCI_OS_DISTRIBUTION)"
+   echo -x "\t-X : execute script"
    echo -e "\t-h : display this help"
    exit 1
 }
@@ -37,10 +38,11 @@ fi
 export $(cat "$ENV_PATH$ENV_FILE" | sed 's/#.*//g' | xargs)
 
 # scan arguments:
-while getopts "o:h" opt
+while getopts "o:Xh" opt
 do
    case "$opt" in
       o ) OS_DISTRIBUTION="$OPTARG" ;;
+      X ) EXECUTE_FOR_REAL=1 ;;
       h ) help ;;
    esac
 done
@@ -49,6 +51,15 @@ done
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root." 
    exit 1
+fi
+
+# check if execute the script for real or not:
+if ! [EXECUTE_FOR_REAL == 1 ]
+then
+  echo -e "\n\r[WARN] not executed:    ...use:"
+  echo -e "\t> $0 -X"
+  echo -e "\t> to run installation for real.\n\r"
+   exit 1  
 fi
 
 # update partition number defaults if set:

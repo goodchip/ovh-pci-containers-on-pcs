@@ -2,14 +2,14 @@
 Automation post-install scripts for install docker based configuration running on PCI (public cloud instance) with containers attached on PCS (public cloud storage)
 
 
-# Installation :
+# Scripts installation :
 * Update distribution and install git if not present:
 > sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y install git
 
 * Clone the repo to your current directory:
 > git clone https://github.com/goodchip/ovh-pci-containers-on-pcs.git && sudo chmod +x ovh-pci-containers-on-pcs/.configure && sudo ./ovh-pci-containers-on-pcs/.configure
 
-# Configuration:
+# Scripts configuration:
 * Locate you into the project root directory:
 > cd ovh-pci-containers-on-pcs/
 
@@ -22,7 +22,7 @@ Automation post-install scripts for install docker based configuration running o
 * Save the '.env' file typing [CTRL+X] and [y] and [ENTER]
 
 
-# Usage :
+# Scripts Usage : install system and containers
 * Use the differents scripts located into /distrib##/ directories to configure step by step your instance, by example (for debian10):
 
 > sudo ./debian10/install-pci.sh -h        # for get help to prepare your PCI
@@ -37,7 +37,15 @@ Automation post-install scripts for install docker based configuration running o
 
 > sudo ./debian10/install-nextcloud.sh -h   # for get help to install container nextcloud in your PCS
 
-* OR, use the autoinstall script for all-in-one configuration (make you sure to have correctly edited the '.env' file after!!!) :
-> sudo ./auto-install.sh
+* OR, use the auto-install script for all-in-one configuration (make you sure to have correctly edited the '.env' file after!!!) :
+> sudo ./auto-install.sh -X
+
+
+# Scripts Usage : backup containers
+* Use the differents scripts located into /distrib##/ directories to backup containers one by one:
+> sudo ./debian10/backup-wordpress.sh -h        # for get help to backup wordpress site and database containers
+
+* OR, use the auto-backup script for backup all containers (make you sure to have correctly edited the '.env' file after!!!) :
+> sudo ./auto-backup.sh
 
 # Have fun!

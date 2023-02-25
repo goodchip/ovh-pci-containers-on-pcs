@@ -54,7 +54,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # check if execute the script for real or not:
-if ! [EXECUTE_FOR_REAL == 1 ]
+if ! [ $EXECUTE_FOR_REAL == 1 ]
 then
   echo -e "\n\r[WARN] not executed:    ...use:"
   echo -e "\t> $0 -X"

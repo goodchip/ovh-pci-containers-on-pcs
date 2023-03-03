@@ -27,7 +27,7 @@ help()
    echo -e "\t-r : set db_rootpass to use (default: $DEFAULT_CONTAINER_WORDPRESS_DB_ROOTPASS)"
    echo -e "\t-l : set logs max size to use (default: $DEFAULT_CONTAINER_WORDPRESS_LOGSMAXSIZE)"
    echo -e "\t-e : set email for certificat (default: $DEFAULT_CONTAINER_WEBPROXY_EMAIL)"
-   echo -e "\t-p : set path of container to install (default: $DEFAULT_CONTAINER_WORDPRESS_PATH)"
+   echo -e "\t-p : set path of container to install (default: $DEFAULT_PCI_INSTALL_PATH)"
    echo -e "\t-n : set name of container to install (default: $DEFAULT_CONTAINER_WORDPRESS_NAME)"
    echo -e "\t-w : set name of proxy network to link (default: $DEFAULT_CONTAINER_WEBPROXY_NETWORK)"   
    echo -e "\t-h : display this help"
@@ -160,7 +160,7 @@ fi
 # update container path defaults if set:
 if [ -z "$CONTAINERS_PATH" ]
 then
-   CONTAINERS_PATH=$DEFAULT_CONTAINER_WORDPRESS_PATH;
+   CONTAINERS_PATH=$DEFAULT_PCI_INSTALL_PATH;
 fi
 
 # update container name defaults if set:
@@ -208,7 +208,7 @@ patch 'LETSENCRYPT_EMAIL=' $EMAIL '.env'
 patch 'NETWORK=' $WEBPROXY_NETWORK '.env'
 
 # set users, groups and rights on site path and subdirectories:
-chown -R www-data:www-data "CONTAINERS_PATH$CONTAINERS_NAME/data/site"
+chown -R www-data:www-data "CONTAINERS_PATH$CONTAINERS_NAME/$DEFAULT_CONTAINER_WORDPRESS_SITE_SOURCEDIR"
 
 # launch containers:
 echo "Launch wordpress container ...";

@@ -16,8 +16,8 @@ help()
 {
    echo "usage: $0 [-n <name>] [-p <path>] [-b <backuppath>] [-s <sitesourcedir>] [-d <database>] [-r <dbrootpass>] [-h]"
    echo -e "\t-n : set name of container to restore (default: $DEFAULT_CONTAINER_WORDPRESS_NAME)"
-   echo -e "\t-p : set path of pcs containers (default: $DEFAULT_PCS_DEVICE_MOUNT_PATH)"
-   echo -e "\t-b : set path of backup source (default: $DEFAULT_PCS_DEVICE_BACKUP_PATH)"
+   echo -e "\t-p : set path of pcs containers (default: $DEFAULT_PCI_INSTALL_PATH)"
+   echo -e "\t-b : set path of backup source (default: $DEFAULT_PCI_BACKUP_PATH)"
    echo -e "\t-s : set source dir of container site (default: $DEFAULT_CONTAINER_WORDPRESS_SITE_SOURCEDIR)"
    echo -e "\t-d : set name of db source (default: $DEFAULT_CONTAINER_WORDPRESS_DB_DATABASE)"
    echo -e "\t-r : set rootpass of db source (default: $DEFAULT_CONTAINER_WORDPRESS_DB_ROOTPASS)"
@@ -76,13 +76,13 @@ fi
 # update container path defaults if set:
 if [ -z "$CONTAINERS_PATH" ]
 then
-   CONTAINERS_PATH=$DEFAULT_PCS_DEVICE_MOUNT_PATH;
+   CONTAINERS_PATH=$DEFAULT_PCI_INSTALL_PATH;
 fi
 
 # update backup path defaults if set:
 if [ -z "$BACKUP_PATH" ]
 then
-   BACKUP_PATH=$DEFAULT_PCS_DEVICE_BACKUP_PATH;
+   BACKUP_PATH=$DEFAULT_PCI_BACKUP_PATH;
 fi
 
 # update site source directory defaults if set:

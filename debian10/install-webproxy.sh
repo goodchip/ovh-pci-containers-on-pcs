@@ -91,7 +91,7 @@ cd /mnt/containers/
 echo "Configuring web proxy to listen $IP and making bot cerficat using email: $EMAIL ...";
 git clone --recurse-submodules "$DEFAULT_CONTAINER_WEBPROXY_GIT" "$CONTAINERS_NAME"
 cd "$CONTAINERS_NAME/bin"
-./fresh-start.sh --yes -e "$EMAIL" -ip "$IP" --skip-docker-image-check
+./fresh-start.sh --yes -e "$EMAIL" -ip "$IP" --skip-docker-image-check --use-nginx-conf-files
 
 # have sure than docker-compose was started (fresh-start script is bugged sometime for run it at the end of configuration)
 docker-compose up -d

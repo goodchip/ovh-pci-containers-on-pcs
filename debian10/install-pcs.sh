@@ -17,7 +17,7 @@ help()
    echo "usage: $0 [-d <device>] [-u <unit>] [-p <path>] [-h]"
    echo -e "\t-d : set device to install containers (default: $DEFAULT_PCS_DEVICE_NAME)"
    echo -e "\t-u : set unit partition to install containers (default: $DEFAULT_PCS_DEVICE_UNIT)"
-   echo -e "\t-p : set path to mount containers (default: $DEFAULT_PCS_DEVICE_MOUNT_PATH)"
+   echo -e "\t-p : set path to mount containers (default: $DEFAULT_PCI_INSTALL_PATH)"
    echo -e "\t-h : display this help"
    exit 1
 }
@@ -70,7 +70,7 @@ fi
 # update mount path defaults if set:
 if [ -z "$DEVICE_MOUNT_PATH" ]
 then
-   DEVICE_MOUNT_PATH=$DEFAULT_PCS_DEVICE_MOUNT_PATH;
+   DEVICE_MOUNT_PATH=$DEFAULT_PCI_INSTALL_PATH;
 fi
 
 # start installation:

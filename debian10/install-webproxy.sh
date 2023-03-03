@@ -17,7 +17,7 @@ help()
    echo "usage: $0 [-e <email>] [-i <ip>] [-p <path>] [-n <name>] [-h]"
    echo -e "\t-e : set email for cetificat (default: $DEFAULT_CONTAINER_WEBPROXY_EMAIL)"
    echo -e "\t-i : set public ip to listen (default: $DEFAULT_CONTAINER_WEBPROXY_IP)"
-   echo -e "\t-p : set path of container to install (default: $DEFAULT_PCS_DEVICE_MOUNT_PATH)"
+   echo -e "\t-p : set path of container to install (default: $DEFAULT_PCI_INSTALL_PATH)"
    echo -e "\t-n : set name of container to install (default: $DEFAULT_CONTAINER_WEBPROXY_NAME)"
    echo -e "\t-h : display this help"
    exit 1
@@ -72,7 +72,7 @@ fi
 # update container path defaults if set:
 if [ -z "$CONTAINERS_PATH" ]
 then
-   CONTAINERS_PATH=$DEFAULT_PCS_DEVICE_MOUNT_PATH;
+   CONTAINERS_PATH=$DEFAULT_PCI_INSTALL_PATH;
 fi
 
 # update container name defaults if set:

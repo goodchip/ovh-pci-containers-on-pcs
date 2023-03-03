@@ -85,7 +85,7 @@ fi
 echo "Installing web proxy on $CONTAINERS_PATH$CONTAINERS_NAME/ ...";
 
 # prepare containers installation:
-cd /mnt/containers/
+cd "$CONTAINERS_PATH"
 
 # install NGINX Proxy Automation:
 echo "Configuring web proxy to listen $IP and making bot cerficat using email: $EMAIL ...";

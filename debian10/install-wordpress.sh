@@ -188,9 +188,6 @@ git clone "$DEFAULT_CONTAINER_WORDPRESS_GIT" "$CONTAINERS_NAME"
 echo "Configuring wordpress container ...";
 cd "$CONTAINERS_NAME"
 
-# patch docker-compose.yml for bug if more one ':/var/lib/mysql' is declared (multiple docker configuration):
-patch ':/var/lib/mysql' '-'$SITE_IMAGE 'docker-compose.yml'
-
 # make own environnement variables in patching defaults input founded in .env.example:
 cp '.env.example' '.env'
 patch 'COMPOSE_PROJECT_NAME=' $CONTAINERS_NAME '.env'

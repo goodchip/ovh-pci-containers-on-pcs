@@ -15,6 +15,8 @@ ENV_FILE=".env"
 help()
 {
    echo "usage: $0 [-h]"
+   echo -e "\t-i : set the path for install containers (default: $DEFAULT_PCI_INSTALL_PATH)"
+   echo -e "\t-b : set the path for backup containers (default: $DEFAULT_PCI_BACKUP_PATH)"
    echo -e "\t-h : display this help"
    exit 1
 }
@@ -39,6 +41,8 @@ export $(cat "$ENV_PATH$ENV_FILE" | sed 's/#.*//g' | xargs)
 while getopts "h" opt
 do
    case "$opt" in
+      i ) INSTALL_PATH="$OPTARG" ;;
+      b ) BACKUP_PATH="$OPTARG" ;;
       h ) help ;;
    esac
 done
@@ -47,6 +51,18 @@ done
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root." 
    exit 1
+fi
+
+# update container install path defaults if set:
+if [ -z "$INSTALL_PATH" ]
+then
+   INSTALL_PATH=$DEFAULT_PCI_INSTALL_PATH;
+fi
+
+# update container backup path defaults if set:
+if [ -z "$BACKUP_PATH" ]
+then
+   BACKUP_PATH=$DEFAULT_PCI_BACKUP_PATH;
 fi
 
 # start installation:
@@ -61,6 +77,10 @@ apt-get -y install git
 # secure .env files:
 chown root:root .env*
 chmod 600 .env*
+
+# make dirs for install and backups:
+mkdir "$INSTALL_PATH"
+mkdir "$BACKUP_PATH"
 
 # end:
 echo "Installation finished.";

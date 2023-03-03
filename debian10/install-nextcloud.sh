@@ -28,7 +28,7 @@ help()
    echo -e "\t-k : set db userpass to use (default: $DEFAULT_CONTAINER_NEXTCLOUD_DB_USERPASS)"
    echo -e "\t-r : set db_rootpass to use (default: $DEFAULT_CONTAINER_NEXTCLOUD_DB_ROOTPASS)"
    echo -e "\t-e : set email for certificat (default: $DEFAULT_CONTAINER_WEBPROXY_EMAIL)"
-   echo -e "\t-p : set path of container to install (default: $DEFAULT_PCS_DEVICE_MOUNT_PATH)"
+   echo -e "\t-p : set path of container to install (default: $DEFAULT_PCI_INSTALL_PATH)"
    echo -e "\t-n : set name of container to install (default: $DEFAULT_CONTAINER_NEXTCLOUD_NAME)"
    echo -e "\t-w : set name of proxy network to link (default: $DEFAULT_CONTAINER_WEBPROXY_NETWORK)"   
    echo -e "\t-h : display this help"
@@ -168,7 +168,7 @@ fi
 # update container path defaults if set:
 if [ -z "$CONTAINERS_PATH" ]
 then
-   CONTAINERS_PATH=$DEFAULT_PCS_DEVICE_MOUNT_PATH;
+   CONTAINERS_PATH=$DEFAULT_PCI_INSTALL_PATH;
 fi
 
 # update container name defaults if set:
@@ -187,7 +187,7 @@ fi
 echo "Installing nextcloud on $CONTAINERS_PATH$CONTAINERS_NAME/ ...";
 
 # prepare containers installation:
-cd /mnt/containers/
+cd "$CONTAINERS_PATH"
 
 # install container nextcloud Automation:
 git clone "$DEFAULT_CONTAINER_NEXTCLOUD_GIT" "$CONTAINERS_NAME"
